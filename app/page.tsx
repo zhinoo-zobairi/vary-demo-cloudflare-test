@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <>
@@ -37,6 +39,9 @@ export default function Home() {
           renders instantly, a deliberately slow part streams in after.
         </dd>
       </dl>
+      <p>
+        <Link href="/findings">Findings</Link>
+      </p>
     </>
   );
 }

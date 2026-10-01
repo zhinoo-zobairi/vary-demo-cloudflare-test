@@ -1,12 +1,16 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --accent-green: #1a7f37;
+  --accent-amber: #9a6700;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --accent-green: #4ade80;
+    --accent-amber: #fbbf24;
   }
 }
 
@@ -131,4 +135,75 @@ button {
 
 button:hover {
   background: color-mix(in srgb, currentColor 22%, transparent);
+}
+
+.verdict {
+  font-size: 1.05rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.pill {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pill-green {
+  color: var(--accent-green);
+  background: color-mix(in srgb, var(--accent-green) 18%, transparent);
+}
+
+.pill-amber {
+  color: var(--accent-amber);
+  background: color-mix(in srgb, var(--accent-amber) 18%, transparent);
+}
+
+.result-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.result-block h3 {
+  font-size: 1rem;
+}
+
+.strip {
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  border-left: 3px solid;
+}
+
+.strip h2 {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.strip ul {
+  list-style: disc;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.strip-amber {
+  border-left-color: var(--accent-amber);
+  background: color-mix(in srgb, var(--accent-amber) 8%, transparent);
+}
+
+.strip-neutral {
+  border-left-color: color-mix(in srgb, currentColor 35%, transparent);
+  background: color-mix(in srgb, currentColor 6%, transparent);
+}
+
+.footnote {
+  font-size: 0.8rem;
+  opacity: 0.65;
 }
