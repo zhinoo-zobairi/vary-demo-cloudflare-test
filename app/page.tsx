@@ -1,69 +1,42 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      <h1>VaryDemo</h1>
+      <p>
+        A small Next.js 16 App Router demo built to show, and then test, how
+        CDNs cache App Router responses. The nav bar above is itself the{" "}
+        <strong>persistent layout</strong> feature: it stays mounted as you
+        move between the pages below instead of being torn down and rebuilt.
+      </p>
+      <p>
+        Each nav entry has two links to the same page &mdash; one with
+        default <strong>prefetching</strong> and one with it turned off.
+        Click both and compare: the prefetched one should feel instant
+        because its data was already warmed before you clicked.
+      </p>
+      <dl>
+        <dt>/dynamic</dt>
+        <dd>
+          Control page: no caching, no streaming. Every visit re-renders
+          everything from scratch.
+        </dd>
+        <dt>/streaming</dt>
+        <dd>
+          No caching either, but the slow parts stream in independently via
+          Suspense instead of blocking the whole page.
+        </dd>
+        <dt>/isr</dt>
+        <dd>
+          Incremental Static Regeneration via `&apos;use cache&apos;` +
+          `cacheLife`, with a button and an API route to trigger on-demand
+          revalidation.
+        </dd>
+        <dt>/ppr</dt>
+        <dd>
+          Partial Prerendering via Cache Components: a cached static shell
+          renders instantly, a deliberately slow part streams in after.
+        </dd>
+      </dl>
+    </>
   );
 }

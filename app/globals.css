@@ -47,3 +47,88 @@ a {
     color-scheme: dark;
   }
 }
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+}
+
+.nav-home {
+  font-weight: 700;
+}
+
+.nav ul {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.nav li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.nav-label {
+  opacity: 0.7;
+}
+
+.nav li a {
+  text-decoration: underline;
+}
+
+main {
+  padding: 1.5rem;
+  max-width: 48rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.clock {
+  font-family: monospace;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  background: color-mix(in srgb, currentColor 12%, transparent);
+  border-radius: 0.375rem;
+  width: fit-content;
+}
+
+.arrival {
+  display: block;
+  font-family: monospace;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 0.75rem;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+dt {
+  opacity: 0.7;
+}
+
+button {
+  font: inherit;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  background: color-mix(in srgb, currentColor 12%, transparent);
+  cursor: pointer;
+  width: fit-content;
+}
+
+button:hover {
+  background: color-mix(in srgb, currentColor 22%, transparent);
+}
