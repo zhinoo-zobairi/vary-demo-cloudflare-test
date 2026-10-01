@@ -45,14 +45,13 @@ export function PageClock({ children }: { children: ReactNode }) {
 
 export function ArrivalMarker({ label }: { label: string }) {
   const startedAt = useContext(ClockContext);
-  const [arrivedAt, setArrivedAt] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (startedAt !== null && arrivedAt === null) {
-      setArrivedAt(Math.round(performance.now() - startedAt));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startedAt]);
+  // Computed once, during this component's first client render — which
+  // only happens once its streamed content has actually arrived. A lazy
+  // initializer (same pattern PageClock uses for startedAt) avoids the
+  // extra render a useEffect + setState round-trip would cost here.
+  const [arrivedAt] = useState(() =>
+    startedAt !== null ? Math.round(performance.now() - startedAt) : null,
+  );
 
   if (arrivedAt === null) return null;
 
