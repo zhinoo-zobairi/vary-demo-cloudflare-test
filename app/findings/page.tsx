@@ -5,18 +5,19 @@ export default function FindingsPage() {
   return (
     <>
       <p className="verdict">
-        Turn on Cloudflare&apos;s new Vary setting, and HTML and RSC
-        responses to the same URL stay separate. Leave it off, and they
-        don&apos;t.
+        With Cloudflare&apos;s Vary setting on, HTML and RSC responses for
+        the same URL stayed separate in every test. With it off, one case
+        broke: an RSC request without Next&apos;s _rsc parameter got the
+        cached HTML.
       </p>
 
       <div className="result-block">
         <span className="pill pill-amber">Needs attention</span>
         <h3>Cache Rule only, no Vary setting</h3>
         <p>
-          We sent a React-app request (header Rsc: 1) to /isr. Cloudflare
-          served the cached HTML page anyway (HIT, text/html) &mdash; the
-          two variants got mixed up.
+          A request to /isr with the Rsc: 1 header but no _rsc parameter
+          got the cached HTML (HIT, text/html). Requests that carried _rsc
+          were already kept apart by their URL.
         </p>
       </div>
 
@@ -36,9 +37,9 @@ export default function FindingsPage() {
         <span className="pill pill-green">Good</span>
         <h3>Real browser</h3>
         <p>
-          In a real browser, both page navigations and prefetches to /isr
-          came back as text/x-component through Cloudflare. No HTML ever
-          leaked into an RSC response.
+          Prefetch requests for /isr, sent by the browser through
+          Cloudflare, came back as text/x-component. A click navigation to
+          /dynamic did too. No HTML showed up in an RSC response.
         </p>
       </div>
 
@@ -55,19 +56,16 @@ export default function FindingsPage() {
         <h2>Needs attention</h2>
         <ul>
           <li>
-            Revalidating on our origin doesn&apos;t tell Cloudflare&apos;s
-            edge anything. The origin had fresh data while the edge kept
-            serving the old cached copy (HIT, age 18s). Purging /isr only
-            cleared the HTML copy &mdash; the ?_rsc= copies were untouched
-            and stayed cached.
+            When the origin&apos;s /isr content changed, the edge kept
+            serving its old copy until s-maxage ran out (HIT, age 18s).
+            Purging /isr cleared the HTML copy only. The ?_rsc= prefetch
+            copy we watched stayed cached.
           </li>
           <li>
-            Prefetch responses for /dynamic, /streaming, and /ppr get
-            cached at the edge for anywhere from 30 days to a year &mdash;
-            that&apos;s because our origin sends a long s-maxage. For
-            /dynamic, the same prefetch body came back twice in a row,
-            which suggests only the static shell is being cached, not live
-            data.
+            Prefetch responses for /dynamic, /streaming and /ppr carry a
+            long s-maxage (30 days to a year) and Cloudflare cached them.
+            For /dynamic the body was identical across two requests, so it
+            looks like a static shell only.
           </li>
           <li>
             The browser itself kept a cached disk copy of /isr
